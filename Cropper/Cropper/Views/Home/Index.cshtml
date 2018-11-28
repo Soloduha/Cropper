@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section styles
+{
+    <link href="~/Content/Cropper/main.css" rel="stylesheet" />
+    <link href="~/Content/Cropper/cropper.min.css" rel="stylesheet" />
+}
+
+<div id="fileUploadContainer">
+    
+</div>
+
+<div class="row">
+    <div id="listUploadImages">
+        </div>
+    <div class="col-md-2 plusupload" id="imageContainerPlus">
+        <div class="thumbnail">
+            <img src="~/Images/plus_PNG106.png" class="uploadimage"/>
+        </div>
+        </div>
+   </div>
+
+@Html.Partial("_ImageCropper");
+
+@section scripts
+{
+    <script src="~/Scripts/Cropper/cropper.min.js"></script>
+    <script src="~/Scripts/Cropper/work_cropper.js"></script>
+}
