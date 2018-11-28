@@ -132,4 +132,34 @@
             }
         }
     )
+
+    $("#crop").click(
+        function () {
+            var imageArray = MyCropper.cropper("getCroppedCanvas").toDataURL("image/jpg").split('base64,');
+
+            var myImage = imageArray[1];
+            
+
+            $.ajax({
+                type: 'POST',
+                url: '/Home/SaveImage',
+                data: { imageBase64: myImage},
+                success: function (msg) {
+                    alert(msg.responseText);
+                }
+            });
+
+            //var imageBase64 = myImage.replace(/^data:image\/(png|jpg);base64,/, "");
+            //$.ajax({
+            //    type: 'POST',
+            //    url: "Home/SaveImage",
+            //    data: JSON.stringify(imageBase64),
+            //    contentType: 'application/json; charset=utf-8',
+            //    dataType: 'json',
+            //    success: function (msg) {
+            //        alert(msg.responseText);
+            //    }
+            //});
+        }
+    )
 })
