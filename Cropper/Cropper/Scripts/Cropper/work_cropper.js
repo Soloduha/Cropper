@@ -52,9 +52,10 @@
 
                 context.drawImage(img, 0, 0);
                 $canvas.cropper('destroy').cropper({
-                    aspectRatio: 1 / 1,
+                    aspectRatio: 3 / 1,
                     minCropBoxWidth: 300,
-                    minCropBoxHeight:  300
+                    minCropBoxHeight: 300,
+                    preview: document.getElementsByClassName("img-preview")
                 });
             }
             img.src = e.target.result;
@@ -64,22 +65,22 @@
     }
 
     $("#rotateLeft").click(function () {
-        MyCropper.cropper('rotate', -45);
+        MyCropper.cropper('rotate', 45);
     });
 
     $("#rotateRight").click(function () {
-        MyCropper.cropper('rotate', 45);
+        MyCropper.cropper('rotate', -45);
     });
 
     $("#moveLeft").click(
         function () {
-            MyCropper.cropper('move', -10, 0);
+            MyCropper.cropper('move', 10, 0);
         }
     )
 
     $("#moveRight").click(
         function () {
-            MyCropper.cropper('move', 10, 0);
+            MyCropper.cropper('move', -10, 0);
         }
     )
 
@@ -97,13 +98,13 @@
 
     $("#moveUp").click(
         function () {
-            MyCropper.cropper('move', 0, -10);
+            MyCropper.cropper('move', 0, 10);
         }
     )
 
     $("#moveDown").click(
         function () {
-            MyCropper.cropper('move', 0, 10);
+            MyCropper.cropper('move', 0, -10);
         }
     )
 
@@ -133,6 +134,16 @@
         }
     )
 
+    //$("#cropperClose").click(
+    //    function () {
+    //        $.ajax({
+    //            type: 'GET',
+    //            url: '/Home/Index',
+    //            }
+    //        );
+    //    }
+    //)
+
     $("#crop").click(
         function () {
             var imageArray = MyCropper.cropper("getCroppedCanvas").toDataURL("image/jpg").split('base64,');
@@ -148,18 +159,27 @@
                     alert(msg.responseText);
                 }
             });
+            
+        }
+    )
 
-            //var imageBase64 = myImage.replace(/^data:image\/(png|jpg);base64,/, "");
-            //$.ajax({
-            //    type: 'POST',
-            //    url: "Home/SaveImage",
-            //    data: JSON.stringify(imageBase64),
-            //    contentType: 'application/json; charset=utf-8',
-            //    dataType: 'json',
-            //    success: function (msg) {
-            //        alert(msg.responseText);
-            //    }
-            //});
+    $("#deleteCropper").click(
+        function () {
+            var isHidden = $(".cropper-crop-box").attr("hidden");
+            
+            
+            if (isHidden == "hidden") {
+                $(".cropper-crop-box").attr("hidden", false);
+            }
+            else {
+                $(".cropper-crop-box").attr("hidden", true);
+            }
+        }
+    )
+
+    $(".cropper-drag-box").click(
+        function () {
+                $(".cropper-crop-box").attr("hidden", false);
         }
     )
 })
