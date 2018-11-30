@@ -33,18 +33,16 @@ namespace Cropper.Controllers
         [HttpPost]
         public ActionResult SaveImage(string imageBase64)
         {
-            string path = Server.MapPath("~/Images/");
-
-
+            string path = Server.MapPath("~/Images/") + Guid.NewGuid() + ".jpeg";
+            
             byte[] imageBytes = Convert.FromBase64String(imageBase64);
 
             using (var ms = new MemoryStream(imageBytes, 0, imageBytes.Length))
             {
                 Image image = Image.FromStream(ms, true);
-                image.Save(path + Guid.NewGuid() + ".jpeg", ImageFormat.Jpeg);
+                image.Save(path, ImageFormat.Jpeg);
             }
-
-            return Json(new { success = true, responseText = "Image was saved" }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = true, responseText=path }, JsonRequestBehavior.AllowGet);
         }
     }
 }

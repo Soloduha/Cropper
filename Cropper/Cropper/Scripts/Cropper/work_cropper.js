@@ -150,18 +150,27 @@
 
             var myImage = imageArray[1];
             
-
             $.ajax({
                 type: 'POST',
                 url: '/Home/SaveImage',
-                data: { imageBase64: myImage},
+                data: { imageBase64: myImage },
                 success: function (msg) {
                     alert(msg.responseText);
+                   // AddImage(msg.responseText);
                 }
             });
-            
         }
     )
+
+    function AddImage(data) {
+        var img = $('<img />',
+            {
+                src: data,
+                class: "uploadimage"
+            })
+            .appendTo($('#listUploadImages'));
+        console.log(data);
+    }
 
     $("#deleteCropper").click(
         function () {

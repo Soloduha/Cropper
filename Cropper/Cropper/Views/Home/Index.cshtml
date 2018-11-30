@@ -1,4 +1,6 @@
-﻿@{
+﻿@model List<string>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,18 +10,26 @@
     <link href="~/Content/Cropper/cropper.min.css" rel="stylesheet" />
 }
 
-<div id="fileUploadContainer">
-    
-</div>
+    <div id="fileUploadContainer">
+    </div>
 
 <div class="row">
-    <div id="listUploadImages">
-        </div>
+    <div id="listUploadImages" >
+
+        
+        @if (@Model != null)
+        {
+            foreach (string image in @Model)
+            {
+                <p>image</p>
+            }
+        }
+    </div>
     <div class="col-md-2 plusupload" id="imageContainerPlus">
         <div class="thumbnail">
-            <img src="~/Images/plus_PNG106.png" class="uploadimage"/>
+            <img src="~/Images/plus_PNG106.png" class="uploadimage" />
         </div>
-        </div>
+    </div>
    </div>
 
 @Html.Partial("_ImageCropper");
