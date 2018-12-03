@@ -52,9 +52,9 @@
 
                 context.drawImage(img, 0, 0);
                 $canvas.cropper('destroy').cropper({
-                    aspectRatio: 3 / 1,
-                    minCropBoxWidth: 300,
-                    minCropBoxHeight: 300,
+                    //aspectRatio: 1 / 1,
+                    //minCropBoxWidth: 300,
+                    //minCropBoxHeight: 300,
                     preview: document.getElementsByClassName("img-preview")
                 });
             }
@@ -156,7 +156,7 @@
                 data: { imageBase64: myImage },
                 success: function (msg) {
                     alert(msg.responseText);
-                   // AddImage(msg.responseText);
+                    AddImage(msg.responseText);
                 }
             });
         }
@@ -166,7 +166,7 @@
         var img = $('<img />',
             {
                 src: data,
-                class: "uploadimage"
+                class: "col-md-4 plusupload thumbnail"
             })
             .appendTo($('#listUploadImages'));
         console.log(data);
@@ -189,6 +189,13 @@
     $(".cropper-drag-box").click(
         function () {
                 $(".cropper-crop-box").attr("hidden", false);
+        }
+    )
+
+    $("#cropperClose").click(
+        function () {
+            $(".open").removeClass("open");
+            $(".containerCrop").css('display','');
         }
     )
 })
